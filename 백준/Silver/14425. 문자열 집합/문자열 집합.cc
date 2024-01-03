@@ -3,6 +3,9 @@
 using namespace std;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     int N, M, count;
     cin >> N >> M;
     map<string, string> z;
@@ -11,7 +14,6 @@ int main() {
         cin >> s;
         z.insert({ s, "a" });
     }
-    map<string, string> x;
     for (int i = 0; i < M; i++) {
         string s;
         cin >> s;
