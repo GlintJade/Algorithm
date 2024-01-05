@@ -1,0 +1,24 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<int> numbers, string direction) {
+    vector<int> answer;
+    int n;
+    if(direction == "right"){
+        n = numbers[numbers.size()-1];
+        answer.push_back(n);
+        for(int i=0; i<numbers.size()-1; i++){
+            answer.push_back(numbers[i]);
+        }
+    }
+    else{
+        for(int i=1; i<numbers.size(); i++){
+            answer.push_back(numbers[i]);
+        }
+        n=numbers[0];
+        answer.push_back(n);
+    }
+    return answer;
+}
