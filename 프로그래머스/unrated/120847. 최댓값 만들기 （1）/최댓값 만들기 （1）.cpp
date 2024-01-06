@@ -2,6 +2,6 @@
 #include <algorithm>
 using namespace std;
 int solution(vector<int> numbers) {
-    sort(numbers.begin(), numbers.end());
-    return numbers[numbers.size()-1]*numbers[numbers.size()-2];
+    sort(numbers.begin(), numbers.end(), greater<int>());
+    return numbers[0]*numbers[1];
 }
