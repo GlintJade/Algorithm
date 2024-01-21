@@ -10,18 +10,31 @@ class Solution {
             }
             else n+=Integer.parseInt(s[i]);
         }
-        if(x==1&&n!=0){answer = "x + "+ n;}
-        else if(x==1&&n==0){answer = "x";}
-        else if(x!=0&&n==0){answer = x+"x";}
-        else if(x!=0&&n!=0){answer = x +"x + " + n;}
-        else if(x==0&&n==0){answer = "0";}
-        else if(x==0&&n!=0){answer = Integer.toString(n);}
-        return answer;
+        boolean bx = false, bn = false;
+        if(x>0) bx= true;
+        if(n>0) bn= true;
+        // return bx&&bn==true ? x+"x + "+n : (!bx)&&(!bn)==true ? "0" : (!bx)&&(bn)==true ? Integer.toString(n) : x>1 ? x+"x" : "x";
+        // return bx&&bn==true ? x+"x + "+n : !bx==true ? Integer.toString(n) : x>1 ? x+"x" : "x";
+        String a = "";
+        if(x==0) return Integer.toString(n);
+        else{
+            if(x==1){
+                a="x";
+            }
+            else{
+                a += x+"x";
+            }
+            if(n!=0){
+                a+= " + "+Integer.toString(n);
+            }
+        }
+        return a;
+        
     }
 }
-/*  x   n
-    1   !0 -> x+n
-    1   0 -> x
-    0   0 -> 0
-    0   !0 -> n
+/*  bx  bn
+    0   0   -> 0
+    1   0   -> x
+    0   1   -> n
+    1   1   -> x+n
 */
