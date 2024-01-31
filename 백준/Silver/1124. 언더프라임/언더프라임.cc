@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <math.h>
+
 using namespace std;
-int A, B, answer;
+int A, B, answer=0;
 vector<int> vc;
-bool check1(int n) { //에라토스테네스의  체 -> 소수판별
+bool check1(int n) { //소수판별
 	if (n < 2) return false;
 	for (int i = 2; i <= sqrt(n); i++) {
 		if (n % i == 0) {
@@ -14,7 +14,7 @@ bool check1(int n) { //에라토스테네스의  체 -> 소수판별
 	}
 	return true;
 }
-int check2(int n) {	//소인수분해 -> 공통되는 소수를 어떻게 저장할지?
+int check2(int n) {	//소인수분해 
 	vc.clear();
 	for (int i = 2; i <= sqrt(n); i++) {
 		while (n % i == 0) {
@@ -22,7 +22,7 @@ int check2(int n) {	//소인수분해 -> 공통되는 소수를 어떻게 저장
 			n /= i;
 		}
 	}
-	if (n > 1) {
+	if (n > 1) {	//입력받은 자신의 값을 벡터에 저장
 		vc.push_back(n);
 	}
 	return vc.size();
