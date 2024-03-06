@@ -6,6 +6,6 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(s, " ");
         System.out.println(st.countTokens());
-
+        sc.close();
     }
 }
