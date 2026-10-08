@@ -9,6 +9,5 @@ bool solution(string s)
         if(c == 'p' || c == 'P') pcnt++;
         else if (c=='y' || c == 'Y') ycnt++;
     }
-    if(pcnt != ycnt) return false;
-    return true;
+    return pcnt == ycnt;
 }
