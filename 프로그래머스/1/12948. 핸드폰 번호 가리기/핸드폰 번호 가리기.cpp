@@ -4,9 +4,8 @@
 using namespace std;
 
 string solution(string phone_number) {
-    string answer = "";
-    for(int i =0; i<phone_number.length() - 4; i++) answer += "*";
-    string sub = phone_number.substr(phone_number.length()-4);
-    answer += sub;
-    return answer;
+    for(int i=0; i<phone_number.length()-4; i++){
+        phone_number[i] = '*';
+    }
+    return phone_number;
 }
