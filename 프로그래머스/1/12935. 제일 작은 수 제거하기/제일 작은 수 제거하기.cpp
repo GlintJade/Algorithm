@@ -5,13 +5,9 @@
 using namespace std;
 
 vector<int> solution(vector<int> arr) {
-    int min = 999999999;
-    vector<int> answer;
-    for(int i=0; i<arr.size(); i++) if(min > arr[i]) min = arr[i];
-    for(int i =0; i<arr.size(); i++) {
-        if(arr[i] == min) continue;
-        answer.push_back(arr[i]);
-    }
-    if(answer.empty()) answer.push_back(-1);
-    return answer;
+    vector<int> answer = arr;
+    int min = *min_element(arr.begin(), arr.end());
+    int pos = find(answer.begin(), answer.end(), min) - answer.begin();
+    answer.erase(answer.begin() + pos);
+    return answer.empty() ? vector<int>(1, -1) : answer;
 }
