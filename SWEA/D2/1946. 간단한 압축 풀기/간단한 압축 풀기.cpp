@@ -31,13 +31,12 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
-#include <vector>
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-	int test_case, n;
+	int test_case;
 	int T;
 	/*
 	   아래의 freopen 함수는 input.txt 를 read only 형식으로 연 후,
@@ -55,25 +54,26 @@ int main(int argc, char** argv)
 	*/
 	for(test_case = 1; test_case <= T; ++test_case)
 	{
+        int n;
         cin >> n;
-        vector<string> v;
-        string s;
-        char c;
-        int k;
+        
+        cout << "#" << test_case << '\n';
+        int char_count = 0;
         for(int i =0; i<n; i++) {
+            char c;
+        	int k;
          	cin >> c >> k;
             while(k--) {
-                if(s.length() == 10) {
-                    v.push_back(s);
-                    s = "";
+                cout << c;
+                char_count++;
+                if(char_count == 10) {
+                    cout << '\n';
+                    char_count = 0;
                 }
-                s += c;
             }
         }
-		
-        cout << "#" << test_case << '\n';
-        for(int i = 0; i<v.size(); i++) cout << v[i] << '\n';
-        if (!s.empty()) cout << s <<'\n';
+        if(char_count > 0) cout << '\n';
+        
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
