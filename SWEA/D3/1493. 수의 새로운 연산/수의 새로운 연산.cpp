@@ -2,13 +2,9 @@
 using namespace std;
 
 int diag(int n) { //몇 번째 대각선에 해당하는지 반환하는 함수
-    int answer = 0, minus = 1;
-    while (n>0) {
-        n -= minus;
-        minus++;
-        answer++;
-    }
-    return answer;
+    int minus = 1;
+    while (n>0) n -= minus++;
+    return minus - 1;
 }
 
 int main(void) {
@@ -33,9 +29,7 @@ int main(void) {
         int locat1 = p - num1, locat2 = q - num2;
 
         //좌표 찾기
-        int x1 = 1, y1 = s1, x2 = 1, y2 = s2;
-        for (int i = 1; i <= locat1; i++) { x1++; y1--; }
-        for (int i = 1; i <= locat2; i++) { x2++; y2--; }
+        int x1 = 1+locat1, y1 = s1-locat1, x2 = 1+locat2, y2 = s2-locat2;
         
         //x, y 좌표를 저장한 뒤, (x1 + x2), (y1 + y2) 좌표의 값을 반환
         int x3 = x1 + x2, y3 = y1 + y2;
@@ -43,12 +37,7 @@ int main(void) {
         int num3 = 1 + (s3 * (s3 - 1)) / 2;
 
         int answer = num3;
-        if (x3 > 1) {
-            while (x3 > 1) {
-                answer++;
-                x3--;
-            }
-        }
+        if (x3 > 1) answer += (x3 - 1);
 
         cout << "#" << test_case << ' ' << answer << '\n';
     }
