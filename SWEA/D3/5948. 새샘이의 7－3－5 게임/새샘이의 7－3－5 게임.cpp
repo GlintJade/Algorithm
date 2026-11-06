@@ -12,9 +12,8 @@ void func(int st, int depth, int sum) {
 
     if (st == 7) return;
 
-    for (int i = st; i < 7; i++) {
-        func(i + 1, depth + 1, sum + arr[i]);
-    }
+    func(st + 1, depth + 1, sum + arr[st]);
+    func(st + 1, depth, sum);
 }
 
 int main(void) {
