@@ -4,37 +4,41 @@ using namespace std;
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
+    int test_case;
 
     //int T;
     //cin >> T;
-    for (int test_case = 1; test_case <= 10; test_case++) {
+    for (test_case = 1; test_case <= 10; ++test_case) {
         int N;
-        cin >> N;
-        stack<char> s1, s2;
         string str;
-        cin >> str;
+        cin >> N >> str;
 
-        for (int i = 0; i < str.length(); i++) {
-            s1.push(str[i]);
-        }
+        stack<char> s1;
+        stack<char> s2;
+        for (char c : str) s1.push(c);
 
-        int tmp;
+        char top = s1.top();
+        s1.pop();
+        s2.push(top);
         while (!s1.empty()) {
-            if (!s2.empty() && s1.top() == s2.top()) { //연속한 것을 발견
+            if (!s2.empty() && s1.top() == s2.top()) {
                 s1.pop();
                 s2.pop();
                 continue;
             }
-            tmp = s1.top(); s1.pop();
-            s2.push(tmp);
+            
+            top = s1.top();
+            s1.pop();
+            s2.push(top);
         }
-
+        
         cout << "#" << test_case << ' ';
         while (!s2.empty()) {
             cout << s2.top();
             s2.pop();
         }
         cout << '\n';
+        
     }
     return 0;
 }
