@@ -13,32 +13,29 @@ int main(void) {
         cin >> N;
 
         int x, y;
-        int score[12] = { 0, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20, 0 };
+        int score[12] = { 0, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20, 0};
         int answer = 0;
         for (int i = 0; i < N; i++) {
             cin >> x >> y;
-
-            int xx = x * x;
-            int yy = y * y;
-            for (int i = 1; i <= 11; i++) {
-                int sc = score[i] * score[i];
-                if (xx + yy > sc) {
-                    answer += (i-1);
+            int radius2 = x * x + y * y;
+            for (int j = 1; j <= 11; j++) {
+                if (radius2 > score[j] * score[j]) {
+                    answer += (j - 1);
                     break;
                 }
-                else if (xx + yy == sc) {
-                    answer += i;
-                    break;
-                }
-                else if (xx + yy == 0) {
+                else if (radius2 == 0) {
                     answer += 10;
+                    break;
+                }
+                else if (radius2 == score[j] * score[j]) {
+                    answer += j;
                     break;
                 }
             }
         }
 
 
-        cout << "#" << test_case << ' ' << answer << '\n';
+        cout << "#" << test_case << ' ' << answer  << '\n';
         
     }
     return 0;
