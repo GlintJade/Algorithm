@@ -13,21 +13,20 @@ int main(void) {
         cin >> N;
 
         int answer = 1;
-        for (int i = 1; i <= N/2+1; i++) {
+        for (int i = 1; i <= N/2 +1; i++) {
             int sum = i;
             for (int j = i + 1; j <= N/2+1; j++) {
-                if (sum + j > N) break;
-                else if (sum + j == N) {
+                sum += j;
+                if (sum == N) {
                     answer++;
                     break;
-                }
-                else if (sum + j < N) {
-                    sum += j;
+                } else if (sum > N) {
+                    break;
                 }
             }
         }
 
-        cout << "#" << test_case << ' ' << answer << '\n';
+        cout << "#" << test_case << ' '  << answer << '\n';
         
     }
     return 0;
