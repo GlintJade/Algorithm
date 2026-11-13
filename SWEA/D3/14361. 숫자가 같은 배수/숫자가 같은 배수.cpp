@@ -32,8 +32,8 @@ int main(void) {
                 val /= 10;
             }
             bool check = true;
-            for (int i = 0; i < 10; i++) {
-                if (arr[i] != arr2[i]) {
+            for (int j = 0; j < 10; j++) {
+                if (arr[j] != arr2[j]) {
                     check = false;
                     break;
                 }
