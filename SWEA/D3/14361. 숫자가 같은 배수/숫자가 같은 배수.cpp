@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int main(void) {
@@ -12,31 +12,28 @@ int main(void) {
         int N;
         cin >> N;
 
-        int cnt[10] = { 0 };
-        int tmp = N;
         int nlen = to_string(N).length();
+        int arr[10] = { 0 };
+        int tmp = N;
         while (tmp) {
-            cnt[tmp % 10]++;
+            arr[tmp % 10]++;
             tmp /= 10;
         }
 
         string answer = "impossible";
         for (int i = 2; i <= 9; i++) {
             int val = N * i;
+            int vallen = to_string(val).length();
+            if (nlen != vallen) break;
 
-            if (to_string(val).length() != nlen) {
-                break;
-            }
-
-            int cnt2[10] = { 0 };
+            int arr2[10] = { 0 };
             while (val) {
-                cnt2[val % 10]++;
+                arr2[val % 10]++;
                 val /= 10;
             }
-
             bool check = true;
             for (int i = 0; i < 10; i++) {
-                if (cnt[i] != cnt2[i]) {
+                if (arr[i] != arr2[i]) {
                     check = false;
                     break;
                 }
@@ -46,8 +43,9 @@ int main(void) {
                 break;
             }
         }
-        
-        cout << "#" << test_case << ' ' <<answer << '\n';
+
+
+        cout << "#" << test_case << ' '<< answer << '\n';
         
     }
     return 0;
