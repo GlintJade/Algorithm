@@ -1,7 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <math.h>
+#include <cstring>
 using namespace std;
 
-int lcs[1005][1005];
+int dp[1005][1005];
 
 int main(void) {
     ios::sync_with_stdio(0);
@@ -11,27 +13,28 @@ int main(void) {
     int T;
     cin >> T;
     for (test_case = 1; test_case <= T; ++test_case) {
-        string A, B;
-        cin >> A >> B;
+        string s1, s2;
+        cin >> s1 >> s2;
 
-        memset(lcs, 0, sizeof(lcs));
-        int alen = A.length();
-        int blen = B.length();
+        memset(dp, 0, sizeof(dp));
 
-        
-        for (int i = 1; i <= alen; i++) {
-            for (int j = 1; j <= blen; j++) {
-                if (A[i-1] == B[j-1]) {
-                    lcs[i][j] = lcs[i - 1][j - 1] + 1;
+        int s1len = s1.length();
+        int s2len = s2.length();
+
+        for (int i = 1; i <= s1len; i++) {
+            for (int j = 1; j <= s2len; j++) {
+                if (s1[i-1] == s2[j-1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
                 }
                 else {
-                    lcs[i][j] = max(lcs[i - 1][j], lcs[i][j - 1]); //다르면, 이전 최장 공통 부분수열을 가져옴
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
         }
 
-        cout << "#" << test_case << ' ' << lcs[alen][blen] << '\n';
-        
+
+        cout << "#" << test_case << ' ' << dp[s1len][s2len] << '\n';
+
     }
     return 0;
 }
