@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <stack>
 using namespace std;
 
 int main(void) {
@@ -10,35 +11,35 @@ int main(void) {
     //cin >> T;
     for (test_case = 1; test_case <= 10; ++test_case) {
         int N;
-        string str;
-        cin >> N >> str;
+        cin >> N;
 
-        stack<char> s1;
-        stack<char> s2;
-        for (char c : str) s1.push(c);
+        stack<char> s1, s2;
+        char input;
+        for (int i = 0; i < N; i++) {
+            cin >> input;
+            s1.push(input);
+        }
 
         char top = s1.top();
         s1.pop();
         s2.push(top);
         while (!s1.empty()) {
             if (!s2.empty() && s1.top() == s2.top()) {
-                s1.pop();
-                s2.pop();
+                s1.pop(); s2.pop();
                 continue;
             }
-            
             top = s1.top();
             s1.pop();
             s2.push(top);
         }
-        
+
         cout << "#" << test_case << ' ';
         while (!s2.empty()) {
-            cout << s2.top();
-            s2.pop();
+            top = s2.top(); s2.pop();
+            cout << top;
         }
         cout << '\n';
-        
+
     }
     return 0;
 }
