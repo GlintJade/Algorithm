@@ -1,8 +1,6 @@
 #include <queue>
 #include <iostream>
-
 using namespace std;
-
 
 int main(void) {
     ios::sync_with_stdio(0);
@@ -17,9 +15,7 @@ int main(void) {
 
         int command, num;
         priority_queue<int> q;
-
         cout << "#" << test_case << ' ';
-
         for (int i = 0; i < N; i++) {
             cin >> command;
             if (command == 1) {
@@ -27,19 +23,20 @@ int main(void) {
                 q.push(num);
             }
             else {
-                if (!q.empty()) {
-                    int front = q.top(); q.pop();
-                    cout << front << ' ';
+                if (q.empty()) {
+                    cout << -1 << ' ';
                 }
                 else {
-                    cout << -1 << ' ';
+                    int top = q.top(); q.pop();
+                    cout << top << ' ';
                 }
                 
             }
         }
 
-        cout << '\n';
+		cout << '\n';
         
+
 
     }
     return 0;
