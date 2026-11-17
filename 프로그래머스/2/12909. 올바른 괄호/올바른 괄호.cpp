@@ -8,24 +8,17 @@ bool solution(string s)
 {
     bool answer = true;
 
-    stack<char> s1, s2;
-    for(int i = 0; i<s.length(); i++) s1.push(s[i]);
-    
-    int top = s1.top();
-    s1.pop();
-    s2.push(top);
-    while(!s1.empty()){
-        if(!s2.empty()){
-            if(s1.top() == '(' && s2.top() == ')') {
-                s1.pop(); s2.pop();
-                continue;
-            } 
+    int n =0;
+    for(int i =0; i<s.length(); i++){
+        if(n < 0){
+            return false;
+        } else if (s[i] == '('){
+            n++;
+        } else if (s[i]==')'){
+            n--;
         }
-        top = s1.top();
-        s1.pop();
-        s2.push(top);
+        
     }
-    if(!s2.empty() || !s1.empty()) answer = false;
-
-    return answer;
+    
+    return n==0;
 }
