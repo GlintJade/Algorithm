@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h>
 #include <cstring>
 using namespace std;
 
@@ -18,22 +17,23 @@ int main(void) {
 
         memset(dp, 0, sizeof(dp));
 
-        int s1len = s1.length();
-        int s2len = s2.length();
+        int answer = 0;
+        
+        int len1 = s1.length();
+        int len2 = s2.length();
 
-        for (int i = 1; i <= s1len; i++) {
-            for (int j = 1; j <= s2len; j++) {
-                if (s1[i-1] == s2[j-1]) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+        for (int i = 0; i < len1; i++) {
+            for (int j = 0; j < len2; j++) {
+                if (s1[i] == s2[j]) {
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
                 }
                 else {
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j]);
                 }
             }
         }
 
-
-        cout << "#" << test_case << ' ' << dp[s1len][s2len] << '\n';
+        cout << "#" << test_case << ' '<< dp[len1][len2] << '\n';
 
     }
     return 0;
