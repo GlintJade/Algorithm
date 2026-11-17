@@ -1,18 +1,19 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstring>
 using namespace std;
 
-bool graph[15][15];
-bool visited[15];
+bool graph[25][25];
+bool visited[25];
 int answer;
 int N, M;
 
-void func(int now, int ans) {
+void func(int st, int ans) {
     answer = max(answer, ans);
 
     for (int i = 1; i <= N; i++) {
-        if (!visited[i] && graph[now][i]) {
+        if (!visited[i] && graph[st][i]) {
             visited[i] = true;
-            func(i, ans + 1);
+            func(i, ans+1);
             visited[i] = false;
         }
     }
@@ -28,9 +29,9 @@ int main(void) {
     for (test_case = 1; test_case <= T; ++test_case) {
         cin >> N >> M;
 
-        memset(graph, false, sizeof(graph));
         memset(visited, false, sizeof(visited));
-        answer = 1; //무조건 하나의 정점은 존재함.
+        memset(graph, false, sizeof(graph)); 
+        answer = 1; //정점 한 개는 무조건 지나므로
 
         int x, y;
         for (int i = 0; i < M; i++) {
