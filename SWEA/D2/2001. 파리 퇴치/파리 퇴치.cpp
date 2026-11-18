@@ -12,25 +12,25 @@ int main()
         int N, M;
         cin >> N >> M;
 
-        int arr[20][20];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        int arr[20][20] = { 0 };
+        int prefix[20][20] = { 0 };
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
                 cin >> arr[i][j];
+
+                prefix[i][j] = arr[i][j] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
             }
         }
 
         int answer = 0;
-        for (int i = 0; i < N - M +1; i++) {
-            for (int j = 0; j < N - M +1; j++) {
-                int sum = 0;
-                for (int x = i; x < i + M; x++) {
-                    for (int y = j; y <j+ M; y++) {
-                        sum += arr[x][y];
-                    }
-                }
-                answer = max(answer, sum);
+        for (int i = M; i <= N; i++) {
+            for (int j = M; j <= N; j++) {
+                int sum = prefix[i][j] - prefix[i - M][j] - prefix[i][j - M] + prefix[i - M][j - M];
+                answer = max(sum, answer);
             }
         }
+
+
 
         cout << "#" << test_case << ' ' << answer << '\n';
 
