@@ -1,24 +1,27 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
 using namespace std;
 
-int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+int main()
+{
     int test_case;
-
     int T;
     cin >> T;
+
     for (test_case = 1; test_case <= T; ++test_case) {
         int N;
         cin >> N;
-
+        
         char arr[25][25];
-        int maxCol = INT_MIN, minCol = INT_MAX;
-        int maxRow = INT_MIN, minRow = INT_MAX;
+        int maxCol = 0, minCol = INT_MAX; //열
+        int maxRow = 0, minRow = INT_MAX; //행
         int cnt = 0;
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < N; j ++) {
                 cin >> arr[i][j];
+
                 if (arr[i][j] == '#') {
                     maxCol = max(maxCol, j);
                     minCol = min(minCol, j);
@@ -29,15 +32,15 @@ int main(void) {
             }
         }
 
-        int width = maxCol - minCol + 1;
-        int height = maxRow - minRow + 1;
         string answer = "no";
-        if (width == height && cnt == width * width) {
+        int row = maxRow - minRow +1;
+        int col = maxCol - minCol + 1;
+        if (cnt == row * col && row == col) {
             answer = "yes";
         }
 
-        cout << "#" << test_case << ' ' << answer  << '\n';
-        
+        cout << "#" << test_case << ' ' << answer <<'\n';
+
     }
     return 0;
 }
