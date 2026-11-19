@@ -17,19 +17,18 @@ int main()
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
                 cin >> arr[i][j];
-
                 prefix[i][j] = arr[i][j] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
             }
         }
 
         int answer = 0;
         for (int i = M; i <= N; i++) {
+            int sum = 0;
             for (int j = M; j <= N; j++) {
-                int sum = prefix[i][j] - prefix[i - M][j] - prefix[i][j - M] + prefix[i - M][j - M];
-                answer = max(sum, answer);
+                sum = prefix[i][j] - prefix[i - M][j] - prefix[i][j - M] + prefix[i - M][j - M];
+                answer = max(answer, sum);
             }
         }
-
 
 
         cout << "#" << test_case << ' ' << answer << '\n';
