@@ -1,47 +1,43 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int arr[20][2];
-int N, L;
-int answer;
+int dp[21][10001];
 
-void func(int s, int k, int idx) { //점수와 칼로리, 재료숫자
-    if (k > L) return;
-
-    answer = max(answer, s);
-
-    if (idx == N) return;
-
-    func(s + arr[idx][0], k + arr[idx][1], idx + 1); //재료를 포함하는 경우
-
-    func(s, k, idx + 1); //재료 포함 안하는 경우
-
-}
-
-int main(int argc, char** argv)
+int main()
 {
-	int test_case;
-	int T;
+    int test_case;
+    int T;
+    cin >> T;
 
-	cin >> T;
-	for (test_case = 1; test_case <= T; ++test_case) {
-         cin >> N >> L; //점수, 제한칼로리
-         answer = 0;
+    for (test_case = 1; test_case <= T; ++test_case) {
+        int N, L;
+        cin >> N >> L;
 
-         for (int i = 0; i < 20; i++) {
-             arr[i][0] = 0;
-             arr[i][1] = 0;
-         }
-         
-         for (int i = 0; i < N; i++) {
-             cin >> arr[i][0] >> arr[i][1]; //점수, 칼로리
-         }
+        vector<int> T(N + 1);
+        vector<int> K(N + 1);
 
-         func(0, 0, 0);
-         
+        for (int i = 1; i <= N; i++) {
+            cin >> T[i] >> K[i];
+        }
 
-         cout << "#" << test_case << ' ' << answer << '\n';
-	}
+        for (int i = 0; i < 20; i++) fill(dp[i], dp[i] + 10000, 0);
+        
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= L; j++) {
+                if (j < K[i]) {
+                    dp[i][j] = dp[i - 1][j];
+                }
+                else {
+                    dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - K[i]] + T[i]);
+                }
+            }
+        }
 
-	return 0;
+
+        cout << "#" << test_case << ' ' << dp[N][L] <<'\n';
+
+    }
+    return 0;
 }
