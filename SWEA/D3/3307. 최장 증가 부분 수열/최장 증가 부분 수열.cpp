@@ -1,41 +1,39 @@
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int test_case;
+int main()
+{
+	int test_case;
+	int T;
+	
+	cin >> T;
 
-    int T;
-    cin >> T;
-    for (test_case = 1; test_case <= T; ++test_case) {
-        int N;
-        cin >> N;
+	for (test_case = 1; test_case <= T; ++test_case)
+	{
+		int N;
+		cin >> N;
 
-        long long arr[1005];
-        for (int i = 1; i <= N; i++) cin >> arr[i];
+		long long arr[1005] = { 0 };
+		for (int i = 1; i <= N; i++) cin >> arr[i];
 
-        int dp[1005];
-        dp[1] = 1;
-        for (int i = 1; i <= N; i++) {
-            dp[i] = 1;
+		int cnt[1005] = { 0 };
+		for (int i = 1; i <= N; i++) {
+			cnt[i] = 1; // 자기 자신 하나의 개수를 세팅
+			for (int j = 1; j <= i; j++) {
+				if (arr[i] > arr[j]) { //자기 자신보다 작은 수를 발견할 때
+					cnt[i] = max(cnt[j] + 1, cnt[i]);
+				}
+			}
+		}
 
-            for (int j = 1; j < i; j++) {
-                if (arr[j] < arr[i]) {
-                    dp[i] = max(dp[j] + 1, dp[i]);
-                }
-            }
-        }
+		int answer = 0;
+		for (int i = 1; i <= N; i++) {
+			answer = max(cnt[i], answer);
+		}
+		
 
-        int maxx = 0;
-        for (int i = 1; i <= N; i++) {
-            maxx = max(dp[i], maxx);
-        }
+		cout << "#" << test_case << ' ' << answer << '\n';
 
-        cout << "#" << test_case << ' ' << maxx << '\n';
-
-    }
-
-
-    return 0;
+	}
+	return 0;
 }
