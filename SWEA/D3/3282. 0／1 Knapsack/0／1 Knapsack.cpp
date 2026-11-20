@@ -1,38 +1,43 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<iostream>
+#include <cstring>
 using namespace std;
+
+int dp[105][1005];
 
 int main()
 {
-    int test_case;
-    int T;
-    cin >> T;
+	int test_case;
+	int T;
+	
+	cin >> T;
 
-    for (test_case = 1; test_case <= T; ++test_case) {
-        int N, K;
-        cin >> N >> K;
-        
-        int v[105] = { 0 }, c[105] = { 0 };
-        for (int i = 1; i <= N; i++) {
-            cin >> v[i] >> c[i];
-        }
+	for (test_case = 1; test_case <= T; ++test_case)
+	{
+		int N, K;
+		cin >> N >> K;
 
-        int dp[105][1005] = { 0 };
-        for (int i = 1; i <= N; i++) {
+		memset(dp, 0, sizeof(dp));
 
-            for (int j = 1; j <= K; j++) {
-                if (j < v[i]) {
-                    dp[i][j] = dp[i - 1][j];
-                }
-                else {
-                    dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - v[i]] + c[i]);
-                }
-            }
-        }
+		int V[105] = { 0 };
+		int C[105] = { 0 };
+		for (int i = 1; i <= N; i++) {
+			cin >> V[i] >> C[i];
+		}
 
-        cout << "#" << test_case << ' ' << dp[N][K] <<'\n';
+		for (int i = 1; i <= N; i++) {
+			for (int j = 1; j <= K; j++) {
+				if (j < V[i]) {
+					dp[i][j] = dp[i - 1][j];
+				}
+				else {
+					dp[i][j] = max(dp[i - 1][j], dp[i-1][j - V[i]] + C[i]);
+				}
+			}
+		}
+		
 
-    }
-    return 0;
+		cout << "#" << test_case << ' ' << dp[N][K] << '\n';
+
+	}
+	return 0;
 }
