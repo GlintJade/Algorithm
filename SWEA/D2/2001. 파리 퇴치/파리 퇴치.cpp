@@ -1,23 +1,27 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
+
+int dp[20][10000];
 
 int main()
 {
     int test_case;
     int T;
-
     cin >> T;
+
     for (test_case = 1; test_case <= T; ++test_case) {
         int N, M;
         cin >> N >> M;
 
-        int arr[20][20] = { 0 };
+        int board[20][20] = { 0 };
         int prefix[20][20] = { 0 };
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                cin >> arr[i][j];
-                prefix[i][j] = arr[i][j] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
+                cin >> board[i][j];
+
+                prefix[i][j] = board[i][j] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
             }
         }
 
@@ -29,6 +33,7 @@ int main()
                 answer = max(answer, sum);
             }
         }
+
 
 
         cout << "#" << test_case << ' ' << answer << '\n';
